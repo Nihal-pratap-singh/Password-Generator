@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random  Password Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1> Generator a <br> <span > Random Password</span></h1>
+        <br>
+        <br>
+    
+        <div class="display">
+            <input type="text" id="password" placeholder="Password">
+            <img src="copy.png" onclick="copyPassword()">
+        </div>
+
+        <br>
+<br>
+<br>
+        <button onclick="createPassword()"><img src="generate.png">  Generate Password</button>
+    </div>
+    <script>
+const passwordBox = document.getElementById("password");
+const length = 12;
+const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+const numbers = "1234567890";
+const symbol = "!@#$%^&*()_+[]{}<?/~`";
+const allChars = upperCase + lowerCase + numbers + symbol;
+
+function createPassword() {
+    let password = "";
+    password += upperCase[Math.floor(Math.random() * upperCase.length)];
+    password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+    password += numbers[Math.floor(Math.random() * numbers.length)];
+    password += symbol[Math.floor(Math.random() * symbol.length)];
+    while (length > password.length) {
+        password += allChars[Math.floor(Math.random() * allChars.length)];
+    }
+    passwordBox.value = password;
+}
+
+function copyPassword() {
+    const passwordText = passwordBox.value;
+    if (passwordText) {
+        navigator.clipboard.writeText(passwordText)
+            .then(() => {
+                alert("Password copied to clipboard!");
+            })
+            .catch(err => {
+                console.error("Error copying password:", err);
+            });
+    }
+}
+
+ 
+    </script>
+</body>
+</html>
